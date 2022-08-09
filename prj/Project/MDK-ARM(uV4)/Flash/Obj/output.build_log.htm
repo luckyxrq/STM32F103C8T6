@@ -21,20 +21,25 @@ Target DLL:      Segger\JL2CM3.dll V2.99.40.0
 Dialog DLL:      TCM.DLL V1.53.0.0
  
 <h2>Project:</h2>
-D:\BaiduNetdiskDownload\V4-101_SPI串行Flash读写例程（V1.0）\V4-101_SPI串行Flash读写例程\Project\MDK-ARM(uV4)\project.uvprojx
+D:\local_git\STM32F103C8T6\prj\Project\MDK-ARM(uV4)\project.uvprojx
 Project File Date:  08/09/2022
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Flash'
 compiling main.c...
+..\..\User\app\src\main.c(37): warning:  #177-D: function "protothread1"  was declared but never referenced
+  protothread1(struct pt *pt)
+..\..\User\app\src\main.c(67): warning:  #177-D: function "protothread2"  was declared but never referenced
+  protothread2(struct pt *pt)
+..\..\User\app\src\main.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=5904 RO-data=268 RW-data=88 ZI-data=7544  
+Program Size: Code=13272 RO-data=1524 RW-data=164 ZI-data=4020  
 FromELF: creating hex file...
 After Build - User command #1: CopyHex_Flash.bat
-D:\BaiduNetdiskDownload\V4-101_SPI串行Flash读写例程（V1.0）\V4-101_SPI串行Flash读写例程\Project\MDK-ARM(uV4)>copy Flash\Obj\output.hex ..\output(mdk).hex 
+D:\local_git\STM32F103C8T6\prj\Project\MDK-ARM(uV4)>copy Flash\Obj\output.hex ..\output(mdk).hex 
 已复制         1 个文件。
-".\Flash\Obj\output.axf" - 0 Error(s), 0 Warning(s).
+".\Flash\Obj\output.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 

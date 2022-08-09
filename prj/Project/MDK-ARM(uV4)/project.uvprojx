@@ -325,7 +325,7 @@
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>0</uC99>
+            <uC99>1</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
@@ -339,7 +339,7 @@
               <MiscControls>--diag_suppress=870</MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F10x\Include;..\..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\..\Libraries\STM32_USB-FS-Device_Driver\inc;..\..\Libraries\CMSIS\Include;..\..\User\bsp;..\..\User\bsp\inc;..\..\User\app\inc;..\..\pt-1.4</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F10x\Include;..\..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\..\Libraries\STM32_USB-FS-Device_Driver\inc;..\..\Libraries\CMSIS\Include;..\..\User\bsp;..\..\User\bsp\inc;..\..\User\app\inc;..\..\pt-1.4;..\..\letter-shell\src</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -537,6 +537,46 @@
               <FileName>pt-sem.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\pt-1.4\pt-sem.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>letter-shell</GroupName>
+          <Files>
+            <File>
+              <FileName>shell_ext.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\letter-shell\src\shell_ext.h</FilePath>
+            </File>
+            <File>
+              <FileName>shell_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\letter-shell\src\shell_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>shell.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\letter-shell\src\shell.h</FilePath>
+            </File>
+            <File>
+              <FileName>shell_ext.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\letter-shell\src\shell_ext.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell_companion.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\letter-shell\src\shell_companion.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell_cmd_list.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\letter-shell\src\shell_cmd_list.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\letter-shell\src\shell.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1075,6 +1115,46 @@
               <FileName>pt-sem.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\pt-1.4\pt-sem.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>letter-shell</GroupName>
+          <Files>
+            <File>
+              <FileName>shell_ext.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\letter-shell\src\shell_ext.h</FilePath>
+            </File>
+            <File>
+              <FileName>shell_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\letter-shell\src\shell_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>shell.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\letter-shell\src\shell.h</FilePath>
+            </File>
+            <File>
+              <FileName>shell_ext.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\letter-shell\src\shell_ext.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell_companion.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\letter-shell\src\shell_companion.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell_cmd_list.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\letter-shell\src\shell_cmd_list.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\letter-shell\src\shell.c</FilePath>
             </File>
           </Files>
         </Group>

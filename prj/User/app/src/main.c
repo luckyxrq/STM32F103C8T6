@@ -15,26 +15,15 @@
 */
 
 #include "bsp.h"				/* 底层硬件驱动 */
-
-
-/* 定义例程名和例程发布日期 */
-#define EXAMPLE_NAME	"V4-101_SPI串行Flash读写例程"
-#define EXAMPLE_DATE	"2015-08-30"
-#define DEMO_VER		"1.0"
-
-/* 仅允许本文件内调用的函数声明 */
-static void PrintfLogo(void);
-
-
-
-
 /* We must always include pt.h in our protothreads code. */
 #include "pt.h"
 
 #include <stdio.h> /* For printf(). */
+#include "shell.h"
 
 /* Two flags that the two protothread functions use. */
 static int protothread1_flag, protothread2_flag;
+Shell shell;
 
 /**
  * The first protothread function. A protothread function must always
@@ -55,7 +44,7 @@ protothread1(struct pt *pt)
   while(1) {
     /* Wait until the other protothread has set its flag. */
     PT_WAIT_UNTIL(pt, protothread2_flag != 0);
-    printf("Protothread 1 running\r\n");
+    shellPrint(&shell, "     1      时间:%s\r\n","2022年8月9日22:51:48");
 
     /* We then reset the other protothread's flag, and set our own
        flag so that the other protothread can run. */
@@ -85,7 +74,7 @@ protothread2(struct pt *pt)
 
     /* Wait until the other protothread has set its flag. */
     PT_WAIT_UNTIL(pt, protothread1_flag != 0);
-    printf("Protothread 2 running\r\n");
+    shellPrint(&shell, "     2      时间:%s\r\n","2022年8月9日22:51:48");
     
     /* We then reset the other protothread's flag. */
     protothread1_flag = 0;
@@ -105,6 +94,50 @@ static struct pt pt1, pt2;
 
 
 
+
+
+
+
+
+/**
+ * @brief ??shell?
+ * 
+ * @param data ??
+ * @param len ????
+ * 
+ * @return short ?????????
+ */
+short shellWrite(char *data, unsigned short len)
+{
+	comSendBuf(COM1, (uint8_t*)data, len);
+    return len;
+}
+
+
+/**
+ * @brief ??shell?
+ * 
+ * @param data ??
+ * @param len ????
+ * 
+ * @return short ?????
+ */
+short shellRead(char *data, unsigned short len)
+{
+	if(comGetChar(COM1, (uint8_t*)data))
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+char shellBuffer[512];
+
+
+
 /*
 *********************************************************************************************************
 *	函 数 名: main
@@ -121,51 +154,54 @@ int main(void)
 	*/
 
 	bsp_Init();		/* 硬件初始化 */
-	PrintfLogo();	/* 打印例程信息到串口1 */
+	
+	shell.read = shellRead;
+	shell.write = shellWrite;
+	shellInit(&shell, shellBuffer, 512);
 	
 	/* Initialize the protothread state variables with PT_INIT(). */
-  PT_INIT(&pt1);
-  PT_INIT(&pt2);
-  
+	PT_INIT(&pt1);
+	PT_INIT(&pt2);
+	
+	
+	
+	
   /*
    * Then we schedule the two protothreads by repeatedly calling their
    * protothread functions and passing a pointer to the protothread
    * state variables as arguments.
    */
-  while(1) 
+	while(1) 
 	{
-    protothread1(&pt1);
-    protothread2(&pt2);
-  }
-	
+		shellTask(&shell);
+//		protothread1(&pt1);
+//		protothread2(&pt2);
+	}
+
 }
 
-/*
-*********************************************************************************************************
-*	函 数 名: PrintfLogo
-*	功能说明: 打印例程名称和例程发布日期, 接上串口线后，打开PC机的超级终端软件可以观察结果
-*	形    参：无
-*	返 回 值: 无
-*********************************************************************************************************
-*/
-static void PrintfLogo(void)
+
+
+/* func_argv "hello world" */
+int func_argv(int argc, char *agrv[])
 {
-	printf("\n\r");
-	printf("*************************************************************\n\r");
-	printf("* 例程名称   : %s\r\n", EXAMPLE_NAME);	/* 打印例程名称 */
-	printf("* 例程版本   : %s\r\n", DEMO_VER);		/* 打印例程版本 */
-	printf("* 发布日期   : %s\r\n", EXAMPLE_DATE);	/* 打印例程日期 */
-
-	/* 打印ST固件库版本，这3个定义宏在stm32f10x.h文件中 */
-	printf("* 固件库版本 : V%d.%d.%d (STM32F10x_StdPeriph_Driver)\r\n", __STM32F10X_STDPERIPH_VERSION_MAIN,
-			__STM32F10X_STDPERIPH_VERSION_SUB1,__STM32F10X_STDPERIPH_VERSION_SUB2);
-	printf("* \n\r");	/* 打印一行空格 */
-	printf("* QQ    : 1295744630 \r\n");
-	printf("* 旺旺  : armfly\r\n");
-	printf("* Email : armfly@qq.com \r\n");
-	printf("* 淘宝店: armfly.taobao.com\r\n");
-	printf("* Copyright www.armfly.com 安富莱电子\r\n");
-	printf("*************************************************************\n\r");
+    printf("%dparameter(s)\r\n", argc);
+    for (char i = 1; i < argc; i++)
+    {
+        printf("%s\r\n", agrv[i]);
+    }
+	return 100;
 }
+SHELL_EXPORT_CMD(SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_MAIN), func_argv, func_argv, test);
 
-/***************************** 安富莱电子 www.armfly.com (END OF FILE) *********************************/
+/* func_string 666 'A' "hello world" */
+int func_string(int i, char ch, char *str)
+{
+    printf("input int: %d, char: %c, string: %s\r\n", i, ch, str);
+	
+	return 200;
+}
+SHELL_EXPORT_CMD(SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC), func_string, func_string, test);
+
+
+

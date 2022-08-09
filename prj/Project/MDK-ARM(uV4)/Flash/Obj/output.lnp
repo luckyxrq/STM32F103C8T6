@@ -17,6 +17,10 @@
 ".\flash\obj\misc.o"
 ".\flash\obj\stm32f10x_tim.o"
 ".\flash\obj\system_stm32f10x.o"
+".\flash\obj\shell_ext.o"
+".\flash\obj\shell_companion.o"
+".\flash\obj\shell_cmd_list.o"
+".\flash\obj\shell.o"
 --library_type=microlib --strict --scatter ".\Flash\Obj\output.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

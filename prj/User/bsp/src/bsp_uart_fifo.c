@@ -101,7 +101,7 @@ UART_T *ComToUart(COM_PORT_E _ucPort)
 		#if UART2_FIFO_EN == 1
 			return &g_tUart2;
 		#else
-			return;
+			return 0;
 		#endif
 	}
 	else if (_ucPort == COM3)
