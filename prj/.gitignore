@@ -1,0 +1,70 @@
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.crf
+*.ilk
+*.map
+*.exp
+*.lst
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+*.axf
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+
+# 忽略指定目录
+
+
+
+# needs to commit
+!**/Obj/output.hex
+!**/Obj/output.sct
+
+
+# -------------------------------------------------------------------------------------------------------------------------------------
+# 注意：创建.gitignore文件之前push过某文件，即使.gitignore文件中写入过滤该文件的规则，该规则也不会起作用，git仍然会对该文件进行版本管理
+# git rm -r --cached .
+# git add .
+# git commit -m 'update .gitignore'
