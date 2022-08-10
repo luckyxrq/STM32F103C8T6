@@ -70,7 +70,7 @@ void HardFault_Handler(void)
   }
 #endif	
   
-#if 1	/* 出现异常时，驱动蜂鸣器发声 */	
+#if 0	/* 出现异常时，驱动蜂鸣器发声 */	
 	while(1)
 	{
 		uint16_t m;

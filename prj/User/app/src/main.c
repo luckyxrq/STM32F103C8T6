@@ -20,6 +20,7 @@
 
 #include <stdio.h> /* For printf(). */
 #include "shell.h"
+#include "multi_timer.h"
 
 /* Two flags that the two protothread functions use. */
 static int protothread1_flag, protothread2_flag;
@@ -138,6 +139,17 @@ char shellBuffer[512];
 
 
 
+void cb_timer1(void* arg)
+{
+  shellPrint(&shell, "cb_timer1\r\n");
+}
+
+void cb_timer2(void* arg)
+{
+  shellPrint(&shell, "cb_timer2\r\n");
+}
+
+
 /*
 *********************************************************************************************************
 *	º¯ Êý Ãû: main
@@ -163,17 +175,20 @@ int main(void)
 	PT_INIT(&pt1);
 	PT_INIT(&pt2);
 	
-	
-	
-	
-  /*
-   * Then we schedule the two protothreads by repeatedly calling their
-   * protothread functions and passing a pointer to the protothread
-   * state variables as arguments.
-   */
+  Timer timer1;
+  Timer timer2;
+
+  
+  timer_init(&timer1, cb_timer1, 500, 500 ,0);
+  timer_init(&timer2, cb_timer2, 500, 1000 ,0);
+
+  // timer_start(&timer1);
+  timer_start(&timer2);
+
 	while(1) 
 	{
 		shellTask(&shell);
+    timer_loop();
 		// protothread1(&pt1);
 		// protothread2(&pt2);
 	}

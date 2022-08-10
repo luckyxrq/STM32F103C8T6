@@ -313,7 +313,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>0</interw>
-            <Optim>1</Optim>
+            <Optim>4</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -339,7 +339,7 @@
               <MiscControls>--diag_suppress=870</MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F10x\Include;..\..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\..\Libraries\STM32_USB-FS-Device_Driver\inc;..\..\Libraries\CMSIS\Include;..\..\User\bsp;..\..\User\bsp\inc;..\..\User\app\inc;..\..\pt-1.4;..\..\letter-shell\src;..\..\fal\inc;..\..\FlashDB\inc</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F10x\Include;..\..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\..\Libraries\STM32_USB-FS-Device_Driver\inc;..\..\Libraries\CMSIS\Include;..\..\User\bsp;..\..\User\bsp\inc;..\..\User\app\inc;..\..\pt-1.4;..\..\letter-shell\src;..\..\fal\inc;..\..\FlashDB\inc;..\..\MultiTimer</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -662,6 +662,21 @@
               <FileName>sample_main.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\FlashDB\samples\sample_main.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>MultiTimer</GroupName>
+          <Files>
+            <File>
+              <FileName>multi_timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\MultiTimer\multi_timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>multi_timer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\MultiTimer\multi_timer.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1325,6 +1340,21 @@
               <FileName>sample_main.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\FlashDB\samples\sample_main.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>MultiTimer</GroupName>
+          <Files>
+            <File>
+              <FileName>multi_timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\MultiTimer\multi_timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>multi_timer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\MultiTimer\multi_timer.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -17,6 +17,7 @@
 */
 
 #include "bsp.h"
+#include "multi_timer.h"
 
 /*
 *********************************************************************************************************
@@ -73,7 +74,7 @@ void bsp_RunPer10ms(void)
 extern void GT811_Timer1ms(void);
 void bsp_RunPer1ms(void)
 {
-  ;
+  timer_ticks();
 }
 
 /*
