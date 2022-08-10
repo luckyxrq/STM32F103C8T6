@@ -137,8 +137,9 @@ short shellRead(char *data, unsigned short len)
 
 char shellBuffer[512];
 
-
-
+Timer timer1;
+Timer timer2;
+int time_cnt = 0 ;
 void cb_timer1(void* arg)
 {
   shellPrint(&shell, "cb_timer1\r\n");
@@ -146,7 +147,8 @@ void cb_timer1(void* arg)
 
 void cb_timer2(void* arg)
 {
-  shellPrint(&shell, "cb_timer2\r\n");
+  ++time_cnt;
+  // shellPrint(&shell, "cb_timer2\r\n");
 }
 
 
@@ -174,16 +176,12 @@ int main(void)
 	/* Initialize the protothread state variables with PT_INIT(). */
 	PT_INIT(&pt1);
 	PT_INIT(&pt2);
-	
-  Timer timer1;
-  Timer timer2;
 
-  
   timer_init(&timer1, cb_timer1, 500, 500 ,0);
   timer_init(&timer2, cb_timer2, 500, 1000 ,0);
 
   // timer_start(&timer1);
-  timer_start(&timer2);
+  // timer_start(&timer2);
 
 	while(1) 
 	{
@@ -230,4 +228,15 @@ int reboot(int argc, char *agrv[])
 }
 SHELL_EXPORT_CMD(SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_MAIN), reboot, reboot, reboot);
 
+
+/* func_argv "hello world" */
+int timer_start_2(int argc, char *agrv[])
+{
+  timer_start(&timer2);
+  return 1;
+}
+SHELL_EXPORT_CMD(SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_MAIN), timer_start_2, timer_start_2, timer_start_2);
+
+
+SHELL_EXPORT_VAR(SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_VAR_INT), time_cnt, &time_cnt, time_cnt);
 
