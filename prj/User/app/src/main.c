@@ -21,6 +21,7 @@
 #include <stdio.h> /* For printf(). */
 #include "shell.h"
 #include "multi_timer.h"
+#include "multi_button.h"
 
 /* Two flags that the two protothread functions use. */
 static int protothread1_flag, protothread2_flag;
@@ -142,15 +143,18 @@ Timer timer2;
 int time_cnt = 0 ;
 void cb_timer1(void* arg)
 {
-  shellPrint(&shell, "cb_timer1\r\n");
+  button_ticks();
 }
 
 void cb_timer2(void* arg)
 {
   ++time_cnt;
+	bsp_LedToggle(1);
   // shellPrint(&shell, "cb_timer2\r\n");
 }
 
+
+extern void button_port_init(void);
 
 /*
 *********************************************************************************************************
@@ -168,6 +172,7 @@ int main(void)
 	*/
 
 	bsp_Init();		/* Ó²¼þ³õÊ¼»¯ */
+	button_port_init();
 	
 	shell.read = shellRead;
 	shell.write = shellWrite;
@@ -177,11 +182,11 @@ int main(void)
 	PT_INIT(&pt1);
 	PT_INIT(&pt2);
 
-  timer_init(&timer1, cb_timer1, 500, 500 ,0);
+  timer_init(&timer1, cb_timer1, 5, 5 ,0);
   timer_init(&timer2, cb_timer2, 500, 1000 ,0);
 
-  // timer_start(&timer1);
-  // timer_start(&timer2);
+  timer_start(&timer1);
+  timer_start(&timer2);
 
 	while(1) 
 	{
