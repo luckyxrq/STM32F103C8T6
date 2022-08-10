@@ -21,7 +21,7 @@ void kvdb_type_blob_sample(fdb_kvdb_t kvdb)
 {
     struct fdb_blob blob;
 
-    FDB_INFO("==================== kvdb_type_blob_sample ====================\n");
+    FDB_INFO("==================== kvdb_type_blob_sample ====================\r\n");
 
     { /* CREATE new Key-Value */
         int temp_data = 36;
@@ -30,7 +30,7 @@ void kvdb_type_blob_sample(fdb_kvdb_t kvdb)
          * fdb_blob_make: It's a blob make function, and it will return the blob when make finish.
          */
         fdb_kv_set_blob(kvdb, "temp", fdb_blob_make(&blob, &temp_data, sizeof(temp_data)));
-        FDB_INFO("create the 'temp' blob KV, value is: %d\n", temp_data);
+        FDB_INFO("create the 'temp' blob KV, value is: %d\r\n", temp_data);
     }
 
     { /* GET the KV value */
@@ -40,7 +40,7 @@ void kvdb_type_blob_sample(fdb_kvdb_t kvdb)
         fdb_kv_get_blob(kvdb, "temp", fdb_blob_make(&blob, &temp_data, sizeof(temp_data)));
         /* the blob.saved.len is more than 0 when get the value successful */
         if (blob.saved.len > 0) {
-            FDB_INFO("get the 'temp' value is: %d\n", temp_data);
+            FDB_INFO("get the 'temp' value is: %d\r\n", temp_data);
         }
     }
 
@@ -49,15 +49,15 @@ void kvdb_type_blob_sample(fdb_kvdb_t kvdb)
 
         /* change the "temp" KV's value to 38 */
         fdb_kv_set_blob(kvdb, "temp", fdb_blob_make(&blob, &temp_data, sizeof(temp_data)));
-        FDB_INFO("set 'temp' value to %d\n", temp_data);
+        FDB_INFO("set 'temp' value to %d\r\n", temp_data);
     }
 
     { /* DELETE the KV by name */
         fdb_kv_del(kvdb, "temp");
-        FDB_INFO("delete the 'temp' finish\n");
+        FDB_INFO("delete the 'temp' finish\r\n");
     }
 
-    FDB_INFO("===========================================================\n");
+    FDB_INFO("===========================================================\r\n");
 }
 
 #endif /* FDB_USING_KVDB */

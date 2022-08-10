@@ -636,6 +636,36 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>FlashDB_Sample</GroupName>
+          <Files>
+            <File>
+              <FileName>kvdb_basic_sample.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\FlashDB\samples\kvdb_basic_sample.c</FilePath>
+            </File>
+            <File>
+              <FileName>kvdb_type_blob_sample.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\FlashDB\samples\kvdb_type_blob_sample.c</FilePath>
+            </File>
+            <File>
+              <FileName>kvdb_type_string_sample.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\FlashDB\samples\kvdb_type_string_sample.c</FilePath>
+            </File>
+            <File>
+              <FileName>tsdb_sample.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\FlashDB\samples\tsdb_sample.c</FilePath>
+            </File>
+            <File>
+              <FileName>sample_main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\FlashDB\samples\sample_main.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
@@ -1265,6 +1295,36 @@
               <FileName>fdb_utils.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\FlashDB\src\fdb_utils.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>FlashDB_Sample</GroupName>
+          <Files>
+            <File>
+              <FileName>kvdb_basic_sample.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\FlashDB\samples\kvdb_basic_sample.c</FilePath>
+            </File>
+            <File>
+              <FileName>kvdb_type_blob_sample.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\FlashDB\samples\kvdb_type_blob_sample.c</FilePath>
+            </File>
+            <File>
+              <FileName>kvdb_type_string_sample.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\FlashDB\samples\kvdb_type_string_sample.c</FilePath>
+            </File>
+            <File>
+              <FileName>tsdb_sample.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\FlashDB\samples\tsdb_sample.c</FilePath>
+            </File>
+            <File>
+              <FileName>sample_main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\FlashDB\samples\sample_main.c</FilePath>
             </File>
           </Files>
         </Group>

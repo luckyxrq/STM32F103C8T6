@@ -20,14 +20,14 @@
 
 void kvdb_type_string_sample(fdb_kvdb_t kvdb)
 {
-    FDB_INFO("==================== kvdb_type_string_sample ====================\n");
+    FDB_INFO("==================== kvdb_type_string_sample ====================\r\n");
 
     { /* CREATE new Key-Value */
         char temp_data[10] = "36C";
 
         /* It will create new KV node when "temp" KV not in database. */
         fdb_kv_set(kvdb, "temp", temp_data);
-        FDB_INFO("create the 'temp' string KV, value is: %s\n", temp_data);
+        FDB_INFO("create the 'temp' string KV, value is: %s\r\n", temp_data);
     }
 
     { /* GET the KV value */
@@ -40,7 +40,7 @@ void kvdb_type_string_sample(fdb_kvdb_t kvdb)
         /* the return value is NULL when get the value failed */
         if (return_value != NULL) {
             strncpy(temp_data, return_value, sizeof(temp_data));
-            FDB_INFO("get the 'temp' value is: %s\n", temp_data);
+            FDB_INFO("get the 'temp' value is: %s\r\n", temp_data);
         }
     }
 
@@ -49,15 +49,15 @@ void kvdb_type_string_sample(fdb_kvdb_t kvdb)
 
         /* change the "temp" KV's value to "38.1" */
         fdb_kv_set(kvdb, "temp", temp_data);
-        FDB_INFO("set 'temp' value to %s\n", temp_data);
+        FDB_INFO("set 'temp' value to %s\r\n", temp_data);
     }
 
     { /* DELETE the KV by name */
         fdb_kv_del(kvdb, "temp");
-        FDB_INFO("delete the 'temp' finish\n");
+        FDB_INFO("delete the 'temp' finish\r\n");
     }
 
-    FDB_INFO("===========================================================\n");
+    FDB_INFO("===========================================================\r\n");
 }
 
 #endif /* FDB_USING_KVDB */
