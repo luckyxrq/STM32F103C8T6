@@ -174,8 +174,8 @@ int main(void)
 	while(1) 
 	{
 		shellTask(&shell);
-//		protothread1(&pt1);
-//		protothread2(&pt2);
+		// protothread1(&pt1);
+		// protothread2(&pt2);
 	}
 
 }
@@ -203,5 +203,16 @@ int func_string(int i, char ch, char *str)
 }
 SHELL_EXPORT_CMD(SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC), func_string, func_string, test);
 
+
+/* func_argv "hello world" */
+int reboot(int argc, char *agrv[])
+{
+  shellClear();         /* serial send clear string */
+  bsp_DelayMS(100);     /* wait "clear string" send completed */
+  __set_FAULTMASK(1);   /* close all isr used for rst immediately*/
+  NVIC_SystemReset();   /* reset */
+  return 1;
+}
+SHELL_EXPORT_CMD(SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_MAIN), reboot, reboot, reboot);
 
 

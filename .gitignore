@@ -56,6 +56,8 @@ dkms.conf
 
 # 忽略指定目录
 project.uvguix.*
+EventRecorderStub.scvd
+JLinkLog.txt
 .vscode/
 **/List/*.*
 **/Obj/*.*
