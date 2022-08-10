@@ -55,7 +55,8 @@ Mkfile.old
 dkms.conf
 
 # 忽略指定目录
-
+**/List/*.*
+**/Obj/*.*
 
 
 # needs to commit
