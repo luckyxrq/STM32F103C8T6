@@ -186,8 +186,8 @@ static int erase(long offset, size_t size)
 const struct fal_flash_dev stm32_onchip_flash =
 {
     .name       = "stm32_onchip",
-    .addr       = 0x08000000 + (1024*48),
-    .len        = 16*1024,
+    .addr       = 0x08000000 ,
+    .len        = 64*1024,
     .blk_size   = 1*1024,
     .ops        = {init, read, write, erase},
     .write_gran = 32

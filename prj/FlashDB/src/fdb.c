@@ -56,7 +56,7 @@ fdb_err_t _fdb_init_ex(fdb_db_t db, const char *name, const char *path, fdb_db_t
         fal_init();
         /* check the flash partition */
         if ((db->storage.part = fal_partition_find(path)) == NULL) {
-            FDB_INFO("Error: Partition (%s) not found.\n", path);
+            FDB_INFO("Error: Partition (%s) not found.\r\n", path);
             return FDB_PART_NOT_FOUND;
         }
 
@@ -86,12 +86,12 @@ void _fdb_init_finish(fdb_db_t db, fdb_err_t result)
     if (result == FDB_NO_ERR) {
         db->init_ok = true;
         if (!log_is_show) {
-            FDB_INFO("FlashDB V%s is initialize success.\n", FDB_SW_VERSION);
-            FDB_INFO("You can get the latest version on https://github.com/armink/FlashDB .\n");
+            FDB_INFO("FlashDB V%s is initialize success.\r\n", FDB_SW_VERSION);
+            FDB_INFO("You can get the latest version on https://github.com/armink/FlashDB .\r\n");
             log_is_show = true;
         }
     } else if (!db->not_formatable) {
-        FDB_INFO("Error: %s (%s) is initialize fail (%d).\n", db->type == FDB_DB_TYPE_KV ? "KVDB" : "TSDB",
+        FDB_INFO("Error: %s (%s) is initialize fail (%d).\r\n", db->type == FDB_DB_TYPE_KV ? "KVDB" : "TSDB",
                 db->name, (int)result);
     }
 }

@@ -24,8 +24,8 @@ extern const struct fal_flash_dev stm32_onchip_flash;
 /* partition table */
 #define FAL_PART_TABLE                                                                \
 {                                                                                     \
-    {FAL_PART_MAGIC_WORD,  "fdb_tsdb1",    "stm32_onchip",   104*1024,  8*1024, 0},  \
-    {FAL_PART_MAGIC_WORD,  "fdb_kvdb1",    "stm32_onchip",   112*1024, 16*1024, 0},  \
+    {FAL_PART_MAGIC_WORD,  "fdb_tsdb1",    "stm32_onchip",   48*1024,  8*1024, 0},  \
+    {FAL_PART_MAGIC_WORD,  "fdb_kvdb1",    "stm32_onchip",   56*1024, 6*1024, 0},  \
 }
 #endif /* FAL_PART_HAS_TABLE_CFG */
 
