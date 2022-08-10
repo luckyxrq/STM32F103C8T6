@@ -41,9 +41,11 @@ void bsp_Init(void)
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
 	
 	bsp_InitUart(); 	/* 初始化串口 */
-	bsp_InitLed();
+	bsp_InitKey();		/* 初始化按键 */
 	bsp_InitTimer();	/* 初始化系统滴答定时器 (此函数会开中断) */
 	
+	bsp_InitSPIBus();	/* 配置SPI总线 */
+	bsp_InitSFlash();	/* 初始化串行Flash. 该函数会识别串行FLASH型号 */
 }
 
 /*
@@ -57,7 +59,7 @@ void bsp_Init(void)
 */
 void bsp_RunPer10ms(void)
 {
-
+	bsp_KeyScan();		/* 按键扫描 */	
 }
 
 /*
