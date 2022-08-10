@@ -64,7 +64,7 @@ JLinkLog.txt
 
 
 # needs to commit
-!**/Obj/output.hex
+#!**/Obj/output.hex
 !**/Obj/output.sct
 
 
