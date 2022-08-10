@@ -339,7 +339,7 @@
               <MiscControls>--diag_suppress=870</MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F10x\Include;..\..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\..\Libraries\STM32_USB-FS-Device_Driver\inc;..\..\Libraries\CMSIS\Include;..\..\User\bsp;..\..\User\bsp\inc;..\..\User\app\inc;..\..\pt-1.4;..\..\letter-shell\src;..\..\fal\inc</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F10x\Include;..\..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\..\Libraries\STM32_USB-FS-Device_Driver\inc;..\..\Libraries\CMSIS\Include;..\..\User\bsp;..\..\User\bsp\inc;..\..\User\app\inc;..\..\pt-1.4;..\..\letter-shell\src;..\..\fal\inc;..\..\FlashDB\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -607,6 +607,31 @@
               <FileName>fal_flash_stm32f1_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\fal\src\fal_flash_stm32f1_port.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>FlashDB</GroupName>
+          <Files>
+            <File>
+              <FileName>fdb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\FlashDB\src\fdb.c</FilePath>
+            </File>
+            <File>
+              <FileName>fdb_kvdb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\FlashDB\src\fdb_kvdb.c</FilePath>
+            </File>
+            <File>
+              <FileName>fdb_tsdb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\FlashDB\src\fdb_tsdb.c</FilePath>
+            </File>
+            <File>
+              <FileName>fdb_utils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\FlashDB\src\fdb_utils.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1215,6 +1240,31 @@
               <FileName>fal_flash_stm32f1_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\fal\src\fal_flash_stm32f1_port.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>FlashDB</GroupName>
+          <Files>
+            <File>
+              <FileName>fdb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\FlashDB\src\fdb.c</FilePath>
+            </File>
+            <File>
+              <FileName>fdb_kvdb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\FlashDB\src\fdb_kvdb.c</FilePath>
+            </File>
+            <File>
+              <FileName>fdb_tsdb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\FlashDB\src\fdb_tsdb.c</FilePath>
+            </File>
+            <File>
+              <FileName>fdb_utils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\FlashDB\src\fdb_utils.c</FilePath>
             </File>
           </Files>
         </Group>
