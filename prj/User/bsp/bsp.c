@@ -18,7 +18,11 @@
 
 #include "bsp.h"
 #include "multi_timer.h"
+#include "shell.h"
 
+uint8_t log_level = 0;
+
+SHELL_EXPORT_VAR(SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_VAR_CHAR), log_level, &log_level, log_level);
 /*
 *********************************************************************************************************
 *	º¯ Êý Ãû: bsp_Init
