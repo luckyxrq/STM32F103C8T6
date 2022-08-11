@@ -16,7 +16,7 @@
         <TargetCommonOption>
           <Device>STM32F103C8</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F1xx_DFP.2.3.0</PackID>
+          <PackID>Keil.STM32F1xx_DFP.2.4.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x00005000) IROM(0x08000000,0x00010000) CPUTYPE("Cortex-M3") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -339,7 +339,7 @@
               <MiscControls>--diag_suppress=870</MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F10x\Include;..\..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\..\Libraries\STM32_USB-FS-Device_Driver\inc;..\..\Libraries\CMSIS\Include;..\..\User\bsp;..\..\User\bsp\inc;..\..\User\app\inc;..\..\pt-1.4;..\..\letter-shell\src;..\..\fal\inc;..\..\FlashDB\inc;..\..\MultiTimer</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F10x\Include;..\..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\..\Libraries\STM32_USB-FS-Device_Driver\inc;..\..\Libraries\CMSIS\Include;..\..\User\bsp;..\..\User\bsp\inc;..\..\User\app\inc;..\..\pt-1.4;..\..\letter-shell\src;..\..\MultiTimer</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -583,85 +583,10 @@
               <FileType>1</FileType>
               <FilePath>..\..\letter-shell\src\shell.c</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>fal</GroupName>
-          <Files>
             <File>
-              <FileName>fal.c</FileName>
+              <FileName>shell_port.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\fal\src\fal.c</FilePath>
-            </File>
-            <File>
-              <FileName>fal_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\fal\src\fal_flash.c</FilePath>
-            </File>
-            <File>
-              <FileName>fal_partition.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\fal\src\fal_partition.c</FilePath>
-            </File>
-            <File>
-              <FileName>fal_flash_stm32f1_port.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\fal\src\fal_flash_stm32f1_port.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>FlashDB</GroupName>
-          <Files>
-            <File>
-              <FileName>fdb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\FlashDB\src\fdb.c</FilePath>
-            </File>
-            <File>
-              <FileName>fdb_kvdb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\FlashDB\src\fdb_kvdb.c</FilePath>
-            </File>
-            <File>
-              <FileName>fdb_tsdb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\FlashDB\src\fdb_tsdb.c</FilePath>
-            </File>
-            <File>
-              <FileName>fdb_utils.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\FlashDB\src\fdb_utils.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>FlashDB_Sample</GroupName>
-          <Files>
-            <File>
-              <FileName>kvdb_basic_sample.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\FlashDB\samples\kvdb_basic_sample.c</FilePath>
-            </File>
-            <File>
-              <FileName>kvdb_type_blob_sample.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\FlashDB\samples\kvdb_type_blob_sample.c</FilePath>
-            </File>
-            <File>
-              <FileName>kvdb_type_string_sample.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\FlashDB\samples\kvdb_type_string_sample.c</FilePath>
-            </File>
-            <File>
-              <FileName>tsdb_sample.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\FlashDB\samples\tsdb_sample.c</FilePath>
-            </File>
-            <File>
-              <FileName>sample_main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\FlashDB\samples\sample_main.c</FilePath>
+              <FilePath>..\..\letter-shell\src\shell_port.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -694,7 +619,7 @@
         <TargetCommonOption>
           <Device>STM32F407IG</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F4xx_DFP.2.15.0</PackID>
+          <PackID>Keil.STM32F4xx_DFP.2.16.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu></Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -1261,85 +1186,10 @@
               <FileType>1</FileType>
               <FilePath>..\..\letter-shell\src\shell.c</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>fal</GroupName>
-          <Files>
             <File>
-              <FileName>fal.c</FileName>
+              <FileName>shell_port.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\fal\src\fal.c</FilePath>
-            </File>
-            <File>
-              <FileName>fal_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\fal\src\fal_flash.c</FilePath>
-            </File>
-            <File>
-              <FileName>fal_partition.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\fal\src\fal_partition.c</FilePath>
-            </File>
-            <File>
-              <FileName>fal_flash_stm32f1_port.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\fal\src\fal_flash_stm32f1_port.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>FlashDB</GroupName>
-          <Files>
-            <File>
-              <FileName>fdb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\FlashDB\src\fdb.c</FilePath>
-            </File>
-            <File>
-              <FileName>fdb_kvdb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\FlashDB\src\fdb_kvdb.c</FilePath>
-            </File>
-            <File>
-              <FileName>fdb_tsdb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\FlashDB\src\fdb_tsdb.c</FilePath>
-            </File>
-            <File>
-              <FileName>fdb_utils.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\FlashDB\src\fdb_utils.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>FlashDB_Sample</GroupName>
-          <Files>
-            <File>
-              <FileName>kvdb_basic_sample.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\FlashDB\samples\kvdb_basic_sample.c</FilePath>
-            </File>
-            <File>
-              <FileName>kvdb_type_blob_sample.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\FlashDB\samples\kvdb_type_blob_sample.c</FilePath>
-            </File>
-            <File>
-              <FileName>kvdb_type_string_sample.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\FlashDB\samples\kvdb_type_string_sample.c</FilePath>
-            </File>
-            <File>
-              <FileName>tsdb_sample.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\FlashDB\samples\tsdb_sample.c</FilePath>
-            </File>
-            <File>
-              <FileName>sample_main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\FlashDB\samples\sample_main.c</FilePath>
+              <FilePath>..\..\letter-shell\src\shell_port.c</FilePath>
             </File>
           </Files>
         </Group>

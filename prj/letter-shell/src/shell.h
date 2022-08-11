@@ -437,6 +437,8 @@ typedef struct
 
 #define shellDeInit(shell)              shellRemove(shell)
 
+extern void shellPortInit(void);
+extern void shell_loop(void);
 void shellInit(Shell *shell, char *buffer, unsigned short size);
 void shellRemove(Shell *shell);
 unsigned short shellWriteString(Shell *shell, const char *string);

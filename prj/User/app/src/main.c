@@ -1,51 +1,21 @@
-/*
-*********************************************************************************************************
-*
-*	模块名称 : 主程序模块。
-*	文件名称 : main.c
-*	版    本 : V1.0
-*	说    明 : 串行Flash读写例程例程。核心文件为 bsp_spi_flash.c
-*	修改记录 :
-*		版本号  日期       作者    说明
-*		V1.0    2015-08-30 armfly  首发
-*
-*	Copyright (C), 2013-2014, 安富莱电子 www.armfly.com
-*
-*********************************************************************************************************
-*/
-
-#include "bsp.h"				/* 底层硬件驱动 */
-/* We must always include pt.h in our protothreads code. */
+#include "bsp.h" /* 底层硬件驱动 */
 #include "pt.h"
-
-#include <stdio.h> /* For printf(). */
 #include "shell.h"
 #include "multi_timer.h"
 
 /* Two flags that the two protothread functions use. */
 static int protothread1_flag, protothread2_flag;
-Shell shell;
 
-/**
- * The first protothread function. A protothread function must always
- * return an integer, but must never explicitly return - returning is
- * performed inside the protothread statements.
- *
- * The protothread function is driven by the main loop further down in
- * the code.
- */
-static int
-protothread1(struct pt *pt)
+
+static int protothread1(struct pt *pt)
 {
-  /* A protothread function must begin with PT_BEGIN() which takes a
-     pointer to a struct pt. */
   PT_BEGIN(pt);
 
-  /* We loop forever here. */
-  while(1) {
+  while (1)
+  {
     /* Wait until the other protothread has set its flag. */
     PT_WAIT_UNTIL(pt, protothread2_flag != 0);
-    shellPrint(&shell, "     1      时间:%s\r\n","2022年8月9日22:51:48");
+    printf("     1      时间:%s\r\n", "2022年8月9日22:51:48");
 
     /* We then reset the other protothread's flag, and set our own
        flag so that the other protothread can run. */
@@ -64,19 +34,19 @@ protothread1(struct pt *pt)
  * The second protothread function. This is almost the same as the
  * first one.
  */
-static int
-protothread2(struct pt *pt)
+static int protothread2(struct pt *pt)
 {
   PT_BEGIN(pt);
 
-  while(1) {
+  while (1)
+  {
     /* Let the other protothread run. */
     protothread2_flag = 1;
 
     /* Wait until the other protothread has set its flag. */
     PT_WAIT_UNTIL(pt, protothread1_flag != 0);
-    shellPrint(&shell, "     2      时间:%s\r\n","2022年8月9日22:51:48");
-    
+    printf("     2      时间:%s\r\n", "2022年8月9日22:51:48");
+
     /* We then reset the other protothread's flag. */
     protothread1_flag = 0;
 
@@ -93,64 +63,29 @@ protothread2(struct pt *pt)
  */
 static struct pt pt1, pt2;
 
-
-
-
-
-
-
-
 /**
  * @brief ??shell?
- * 
+ *
  * @param data ??
  * @param len ????
- * 
+ *
  * @return short ?????????
  */
-short shellWrite(char *data, unsigned short len)
-{
-	comSendBuf(COM1, (uint8_t*)data, len);
-    return len;
-}
 
-
-/**
- * @brief ??shell?
- * 
- * @param data ??
- * @param len ????
- * 
- * @return short ?????
- */
-short shellRead(char *data, unsigned short len)
-{
-	if(comGetChar(COM1, (uint8_t*)data))
-	{
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}
-}
-
-char shellBuffer[512];
 
 Timer timer1;
 Timer timer2;
-int time_cnt = 0 ;
-void cb_timer1(void* arg)
+int time_cnt = 0;
+void cb_timer1(void *arg)
 {
-  shellPrint(&shell, "cb_timer1\r\n");
+  printf("cb_timer1\r\n");
 }
 
-void cb_timer2(void* arg)
+void cb_timer2(void *arg)
 {
   ++time_cnt;
-  // shellPrint(&shell, "cb_timer2\r\n");
+  // printf("cb_timer2\r\n");
 }
-
 
 /*
 *********************************************************************************************************
@@ -162,72 +97,65 @@ void cb_timer2(void* arg)
 */
 int main(void)
 {
-	/*
-		ST固件库中的启动文件已经执行了 SystemInit() 函数，该函数在 system_stm32f4xx.c 文件，主要功能是
-	配置CPU系统的时钟，内部Flash访问时序，配置FSMC用于外部SRAM
-	*/
+  /*
+    ST固件库中的启动文件已经执行了 SystemInit() 函数，该函数在 system_stm32f4xx.c 文件，主要功能是
+  配置CPU系统的时钟，内部Flash访问时序，配置FSMC用于外部SRAM
+  */
 
-	bsp_Init();		/* 硬件初始化 */
-	
-	shell.read = shellRead;
-	shell.write = shellWrite;
-	shellInit(&shell, shellBuffer, 512);
-	
-	/* Initialize the protothread state variables with PT_INIT(). */
-	PT_INIT(&pt1);
-	PT_INIT(&pt2);
+  bsp_Init(); /* 硬件初始化 */
 
-  timer_init(&timer1, cb_timer1, 500, 500 ,0);
-  timer_init(&timer2, cb_timer2, 500, 1000 ,0);
+  shellPortInit();
+
+  /* Initialize the protothread state variables with PT_INIT(). */
+  PT_INIT(&pt1);
+  PT_INIT(&pt2);
+
+  timer_init(&timer1, cb_timer1, 500, 500, 0);
+  timer_init(&timer2, cb_timer2, 500, 1000, 0);
 
   // timer_start(&timer1);
   // timer_start(&timer2);
 
-	while(1) 
-	{
-		shellTask(&shell);
+  while (1)
+  {
+    shell_loop();
     timer_loop();
-		// protothread1(&pt1);
-		// protothread2(&pt2);
-	}
-
+    // protothread1(&pt1);
+    // protothread2(&pt2);
+  }
 }
-
-
 
 /* func_argv "hello world" */
 int func_argv(int argc, char *agrv[])
 {
-    printf("%dparameter(s)\r\n", argc);
-    for (char i = 1; i < argc; i++)
-    {
-        printf("%s\r\n", agrv[i]);
-    }
-	return 100;
+  printf("%dparameter(s)\r\n", argc);
+  for (char i = 1; i < argc; i++)
+  {
+    printf("%s\r\n", agrv[i]);
+  }
+  return 100;
 }
-SHELL_EXPORT_CMD(SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_MAIN), func_argv, func_argv, test);
+SHELL_EXPORT_CMD(SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_CMD_MAIN), func_argv, func_argv, test);
 
 /* func_string 666 'A' "hello world" */
 int func_string(int i, char ch, char *str)
 {
-    printf("input int: %d, char: %c, string: %s\r\n", i, ch, str);
-	
-	return 200;
-}
-SHELL_EXPORT_CMD(SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC), func_string, func_string, test);
+  printf("input int: %d, char: %c, string: %s\r\n", i, ch, str);
 
+  return 200;
+}
+SHELL_EXPORT_CMD(SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC), func_string, func_string, test);
 
 /* func_argv "hello world" */
 int reboot(int argc, char *agrv[])
 {
-  shellClear();         /* serial send clear string */
-  bsp_DelayMS(100);     /* wait "clear string" send completed */
-  __set_FAULTMASK(1);   /* close all isr used for rst immediately*/
-  NVIC_SystemReset();   /* reset */
+  shellClear();       /* serial send clear string */
+  bsp_DelayMS(100);   /* wait "clear string" send completed */
+  __set_FAULTMASK(1); /* close all isr used for rst immediately*/
+  NVIC_SystemReset(); /* reset */
   return 1;
 }
-SHELL_EXPORT_CMD(SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_MAIN), reboot, reboot, reboot);
-
+SHELL_EXPORT_CMD(SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_CMD_MAIN), reboot, reboot, reboot);
 
 /* func_argv "hello world" */
 int timer_start_2(int argc, char *agrv[])
@@ -235,8 +163,6 @@ int timer_start_2(int argc, char *agrv[])
   timer_start(&timer2);
   return 1;
 }
-SHELL_EXPORT_CMD(SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_MAIN), timer_start_2, timer_start_2, timer_start_2);
+SHELL_EXPORT_CMD(SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_CMD_MAIN), timer_start_2, timer_start_2, timer_start_2);
 
-
-SHELL_EXPORT_VAR(SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_VAR_INT), time_cnt, &time_cnt, time_cnt);
-
+SHELL_EXPORT_VAR(SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_VAR_INT), time_cnt, &time_cnt, time_cnt);
