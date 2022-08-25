@@ -38,7 +38,7 @@
 	������5�� --- ���������á�
 */
 #define	UART1_FIFO_EN	1
-#define	UART2_FIFO_EN	0
+#define	UART2_FIFO_EN	1
 #define	UART3_FIFO_EN	0
 #define	UART4_FIFO_EN	0
 #define	UART5_FIFO_EN	0
@@ -64,13 +64,13 @@ typedef enum
 
 /* ���崮�ڲ����ʺ�FIFO��������С����Ϊ���ͻ������ͽ��ջ�����, ֧��ȫ˫�� */
 #if UART1_FIFO_EN == 1
-	#define UART1_BAUD			921600
+	#define UART1_BAUD			115200
 	#define UART1_TX_BUF_SIZE	1*1024
 	#define UART1_RX_BUF_SIZE	1*1024
 #endif
 
 #if UART2_FIFO_EN == 1
-	#define UART2_BAUD			115200
+	#define UART2_BAUD			57600
 	#define UART2_TX_BUF_SIZE	1*1024
 	#define UART2_RX_BUF_SIZE	1*1024
 #endif
