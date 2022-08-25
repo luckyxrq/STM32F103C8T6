@@ -1,22 +1,37 @@
-/*
-*********************************************************************************************************
-*
-*	Ä£¿éÃû³Æ : °´¼üÇı¶¯Ä£¿é
-*	ÎÄ¼şÃû³Æ : bsp_key.h
-*	°æ    ±¾ : V1.0
-*	Ëµ    Ã÷ : Í·ÎÄ¼ş
-*
-*	Copyright (C), 2013-2014, °²¸»À³µç×Ó www.armfly.com
-*
-*********************************************************************************************************
-*/
-
 #ifndef __BSP_KEY_H
 #define __BSP_KEY_H
 
-#define KEY_COUNT    10	   					/* °´¼ü¸öÊı, 8¸ö¶ÀÁ¢½¨ + 2¸ö×éºÏ¼ü */
+#define KEY_COUNT    10	   		
 
-/* ¸ù¾İÓ¦ÓÃ³ÌĞòµÄ¹¦ÄÜÖØÃüÃû°´¼üºê */
+/********************************** key pins  start****************************************/
+/* æŒ‰é”®å£å¯¹åº”çš„RCCæ—¶é’Ÿ */
+#define RCC_ALL_KEY 	(RCC_APB2Periph_GPIOA)
+
+#define GPIO_PORT_K1    GPIOA
+#define GPIO_PIN_K1	    GPIO_Pin_1
+
+#define GPIO_PORT_K2    GPIOA
+#define GPIO_PIN_K2	    GPIO_Pin_1
+
+#define GPIO_PORT_K3    GPIOA
+#define GPIO_PIN_K3	    GPIO_Pin_1
+
+#define GPIO_PORT_K4    GPIOA
+#define GPIO_PIN_K4	    GPIO_Pin_1
+
+#define GPIO_PORT_K5    GPIOA
+#define GPIO_PIN_K5	    GPIO_Pin_1
+
+#define GPIO_PORT_K6    GPIOA
+#define GPIO_PIN_K6	    GPIO_Pin_1
+
+#define GPIO_PORT_K7    GPIOA
+#define GPIO_PIN_K7	    GPIO_Pin_1
+
+#define GPIO_PORT_K8    GPIOA
+#define GPIO_PIN_K8	    GPIO_Pin_1
+/********************************** key pins  end  ****************************************/
+
 #define KEY_DOWN_K1		KEY_1_DOWN
 #define KEY_UP_K1		KEY_1_UP
 #define KEY_LONG_K1		KEY_1_LONG
@@ -29,35 +44,35 @@
 #define KEY_UP_K3		KEY_3_UP
 #define KEY_LONG_K3		KEY_3_LONG
 
-#define JOY_DOWN_U		KEY_4_DOWN		/* ÉÏ */
+#define JOY_DOWN_U		KEY_4_DOWN		
 #define JOY_UP_U		KEY_4_UP
 #define JOY_LONG_U		KEY_4_LONG
 
-#define JOY_DOWN_D		KEY_5_DOWN		/* ÏÂ */
+#define JOY_DOWN_D		KEY_5_DOWN		
 #define JOY_UP_D		KEY_5_UP
 #define JOY_LONG_D		KEY_5_LONG
 
-#define JOY_DOWN_L		KEY_6_DOWN		/* ×ó */
+#define JOY_DOWN_L		KEY_6_DOWN		
 #define JOY_UP_L		KEY_6_UP
 #define JOY_LONG_L		KEY_6_LONG
 
-#define JOY_DOWN_R		KEY_7_DOWN		/* ÓÒ */
+#define JOY_DOWN_R		KEY_7_DOWN		
 #define JOY_UP_R		KEY_7_UP
 #define JOY_LONG_R		KEY_7_LONG
 
-#define JOY_DOWN_OK		KEY_8_DOWN		/* ok */
+#define JOY_DOWN_OK		KEY_8_DOWN		
 #define JOY_UP_OK		KEY_8_UP
 #define JOY_LONG_OK		KEY_8_LONG
 
-#define SYS_DOWN_K1K2	KEY_9_DOWN		/* K1 K2 ×éºÏ¼ü */
+#define SYS_DOWN_K1K2	KEY_9_DOWN		
 #define SYS_UP_K1K2	    KEY_9_UP
 #define SYS_LONG_K1K2	KEY_9_LONG
 
-#define SYS_DOWN_K2K3	KEY_10_DOWN		/* K2 K3 ×éºÏ¼ü */
+#define SYS_DOWN_K2K3	KEY_10_DOWN		
 #define SYS_UP_K2K3  	KEY_10_UP
 #define SYS_LONG_K2K3	KEY_10_LONG
 
-/* °´¼üID, Ö÷ÒªÓÃÓÚbsp_KeyState()º¯ÊıµÄÈë¿Ú²ÎÊı */
+
 typedef enum
 {
 	KID_K1 = 0,
@@ -70,94 +85,90 @@ typedef enum
 	KID_JOY_OK
 }KEY_ID_E;
 
-/*
-	°´¼üÂË²¨Ê±¼ä50ms, µ¥Î»10ms¡£
-	Ö»ÓĞÁ¬Ğø¼ì²âµ½50ms×´Ì¬²»±ä²ÅÈÏÎªÓĞĞ§£¬°üÀ¨µ¯ÆğºÍ°´ÏÂÁ½ÖÖÊÂ¼ş
-	¼´Ê¹°´¼üµçÂ·²»×öÓ²¼şÂË²¨£¬¸ÃÂË²¨»úÖÆÒ²¿ÉÒÔ±£Ö¤¿É¿¿µØ¼ì²âµ½°´¼üÊÂ¼ş
-*/
-#define KEY_FILTER_TIME   5
-#define KEY_LONG_TIME     100			/* µ¥Î»10ms£¬ ³ÖĞø1Ãë£¬ÈÏÎª³¤°´ÊÂ¼ş */
 
-/*
-	Ã¿¸ö°´¼ü¶ÔÓ¦1¸öÈ«¾ÖµÄ½á¹¹Ìå±äÁ¿¡£
-*/
+#define KEY_FILTER_TIME   5
+#define KEY_LONG_TIME     100			
+
+
 typedef struct
 {
-	/* ÏÂÃæÊÇÒ»¸öº¯ÊıÖ¸Õë£¬Ö¸ÏòÅĞ¶Ï°´¼üÊÖ·ñ°´ÏÂµÄº¯Êı */
-	uint8_t (*IsKeyDownFunc)(void); /* °´¼ü°´ÏÂµÄÅĞ¶Ïº¯Êı,1±íÊ¾°´ÏÂ */
+	/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ë£¬Ö¸ï¿½ï¿½ï¿½Ğ¶Ï°ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ÂµÄºï¿½ï¿½ï¿½ */
+	uint8_t (*IsKeyDownFunc)(void); /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½Ğ¶Ïºï¿½ï¿½ï¿½,1ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ */
 
-	uint8_t  Count;			/* ÂË²¨Æ÷¼ÆÊıÆ÷ */
-	uint16_t LongCount;		/* ³¤°´¼ÆÊıÆ÷ */
-	uint16_t LongTime;		/* °´¼ü°´ÏÂ³ÖĞøÊ±¼ä, 0±íÊ¾²»¼ì²â³¤°´ */
-	uint8_t  State;			/* °´¼üµ±Ç°×´Ì¬£¨°´ÏÂ»¹ÊÇµ¯Æğ£© */
-	uint8_t  RepeatSpeed;	/* Á¬Ğø°´¼üÖÜÆÚ */
-	uint8_t  RepeatCount;	/* Á¬Ğø°´¼ü¼ÆÊıÆ÷ */
+	uint8_t  Count;			/* ï¿½Ë²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	uint16_t LongCount;		/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	uint16_t LongTime;		/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â³ï¿½ï¿½ï¿½Ê±ï¿½ï¿½, 0ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½â³¤ï¿½ï¿½ */
+	uint8_t  State;			/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½Â»ï¿½ï¿½Çµï¿½ï¿½ï¿½ */
+	uint8_t  RepeatSpeed;	/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	uint8_t  RepeatCount;	/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 }KEY_T;
 
 /*
-	¶¨Òå¼üÖµ´úÂë, ±ØĞë°´ÈçÏÂ´ÎĞò¶¨Ê±Ã¿¸ö¼üµÄ°´ÏÂ¡¢µ¯ÆğºÍ³¤°´ÊÂ¼ş
+	ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ë°´ï¿½ï¿½ï¿½Â´ï¿½ï¿½ï¿½Ê±Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½Ä°ï¿½ï¿½Â¡ï¿½ï¿½ï¿½ï¿½ï¿½Í³ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 
-	ÍÆ¼öÊ¹ÓÃenum, ²»ÓÃ#define£¬Ô­Òò£º
-	(1) ±ãÓÚĞÂÔö¼üÖµ,·½±ãµ÷ÕûË³Ğò£¬Ê¹´úÂë¿´ÆğÀ´Êæ·şµã
-	(2) ±àÒëÆ÷¿É°ïÎÒÃÇ±ÜÃâ¼üÖµÖØ¸´¡£
+	ï¿½Æ¼ï¿½Ê¹ï¿½ï¿½enum, ï¿½ï¿½ï¿½ï¿½#defineï¿½ï¿½Ô­ï¿½ï¿½
+	(1) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ë¿´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	(2) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É°ï¿½ï¿½ï¿½ï¿½Ç±ï¿½ï¿½ï¿½ï¿½Öµï¿½Ø¸ï¿½ï¿½ï¿½
 */
 typedef enum
 {
-	KEY_NONE = 0,			/* 0 ±íÊ¾°´¼üÊÂ¼ş */
+	KEY_NONE = 0,			/* 0 ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ */
 
-	KEY_1_DOWN,				/* 1¼ü°´ÏÂ */
-	KEY_1_UP,				/* 1¼üµ¯Æğ */
-	KEY_1_LONG,				/* 1¼ü³¤°´ */
+	KEY_1_DOWN,				/* 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	KEY_1_UP,				/* 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	KEY_1_LONG,				/* 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 
-	KEY_2_DOWN,				/* 2¼ü°´ÏÂ */
-	KEY_2_UP,				/* 2¼üµ¯Æğ */
-	KEY_2_LONG,				/* 2¼ü³¤°´ */
+	KEY_2_DOWN,				/* 2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	KEY_2_UP,				/* 2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	KEY_2_LONG,				/* 2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 
-	KEY_3_DOWN,				/* 3¼ü°´ÏÂ */
-	KEY_3_UP,				/* 3¼üµ¯Æğ */
-	KEY_3_LONG,				/* 3¼ü³¤°´ */
+	KEY_3_DOWN,				/* 3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	KEY_3_UP,				/* 3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	KEY_3_LONG,				/* 3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 
-	KEY_4_DOWN,				/* 4¼ü°´ÏÂ */
-	KEY_4_UP,				/* 4¼üµ¯Æğ */
-	KEY_4_LONG,				/* 4¼ü³¤°´ */
+	KEY_4_DOWN,				/* 4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	KEY_4_UP,				/* 4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	KEY_4_LONG,				/* 4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 
-	KEY_5_DOWN,				/* 5¼ü°´ÏÂ */
-	KEY_5_UP,				/* 5¼üµ¯Æğ */
-	KEY_5_LONG,				/* 5¼ü³¤°´ */
+	KEY_5_DOWN,				/* 5ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	KEY_5_UP,				/* 5ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	KEY_5_LONG,				/* 5ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 
-	KEY_6_DOWN,				/* 6¼ü°´ÏÂ */
-	KEY_6_UP,				/* 6¼üµ¯Æğ */
-	KEY_6_LONG,				/* 6¼ü³¤°´ */
+	KEY_6_DOWN,				/* 6ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	KEY_6_UP,				/* 6ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	KEY_6_LONG,				/* 6ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 
-	KEY_7_DOWN,				/* 7¼ü°´ÏÂ */
-	KEY_7_UP,				/* 7¼üµ¯Æğ */
-	KEY_7_LONG,				/* 7¼ü³¤°´ */
+	KEY_7_DOWN,				/* 7ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	KEY_7_UP,				/* 7ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	KEY_7_LONG,				/* 7ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 
-	KEY_8_DOWN,				/* 8¼ü°´ÏÂ */
-	KEY_8_UP,				/* 8¼üµ¯Æğ */
-	KEY_8_LONG,				/* 8¼ü³¤°´ */
+	KEY_8_DOWN,				/* 8ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	KEY_8_UP,				/* 8ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	KEY_8_LONG,				/* 8ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 
-	/* ×éºÏ¼ü */
-	KEY_9_DOWN,				/* 9¼ü°´ÏÂ */
-	KEY_9_UP,				/* 9¼üµ¯Æğ */
-	KEY_9_LONG,				/* 9¼ü³¤°´ */
+	/* ï¿½ï¿½Ï¼ï¿½ */
+	KEY_9_DOWN,				/* 9ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	KEY_9_UP,				/* 9ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	KEY_9_LONG,				/* 9ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 
-	KEY_10_DOWN,			/* 10¼ü°´ÏÂ */
-	KEY_10_UP,				/* 10¼üµ¯Æğ */
-	KEY_10_LONG,			/* 10¼ü³¤°´ */
+	KEY_10_DOWN,			/* 10ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	KEY_10_UP,				/* 10ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	KEY_10_LONG,			/* 10ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 }KEY_ENUM;
 
-/* °´¼üFIFOÓÃµ½±äÁ¿ */
+/* ï¿½ï¿½ï¿½ï¿½FIFOï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ */
 #define KEY_FIFO_SIZE	10
 typedef struct
 {
-	uint8_t Buf[KEY_FIFO_SIZE];		/* ¼üÖµ»º³åÇø */
-	uint8_t Read;					/* »º³åÇø¶ÁÖ¸Õë1 */
-	uint8_t Write;					/* »º³åÇøĞ´Ö¸Õë */
-	uint8_t Read2;					/* »º³åÇø¶ÁÖ¸Õë2 */
+	uint8_t Buf[KEY_FIFO_SIZE];		/* ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	uint8_t Read;					/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½1 */
+	uint8_t Write;					/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ´Ö¸ï¿½ï¿½ */
+	uint8_t Read2;					/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½2 */
 }KEY_FIFO_T;
 
-/* ¹©Íâ²¿µ÷ÓÃµÄº¯ÊıÉùÃ÷ */
+
+#define GET_TOUCH_STATE()		GPIO_ReadInputDataBit(GPIO_PORT_K1,GPIO_PIN_K1) /* is touching return 1 */
+
 void bsp_InitKey(void);
 void bsp_KeyScan(void);
 void bsp_PutKey(uint8_t _KeyCode);
@@ -169,4 +180,3 @@ void bsp_ClearKey(void);
 
 #endif
 
-/***************************** °²¸»À³µç×Ó www.armfly.com (END OF FILE) *********************************/

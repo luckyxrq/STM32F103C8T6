@@ -24,53 +24,8 @@
 
 #include "bsp.h"
 
-/*
-	该程序适用于安富莱STM32-V4开发板
 
-	如果用于其它硬件，请修改GPIO定义和 IsKeyDown1 - IsKeyDown8 函数
 
-	如果用户的按键个数小于8个，你可以将多余的按键全部定义为和第1个按键一样，并不影响程序功能
-	#define KEY_COUNT    8	  这个在 bsp_key.h 文件中定义
-*/
-
-/*
-	安富莱STM32-V4 按键口线分配：
-		K1 键      : PC13   (低电平表示按下)
-		K2 键      : PA0    ( --- 高电平表示按下)
-		K3 键      : PG8    (低电平表示按下)
-		摇杆UP键   : PG15   (低电平表示按下)
-		摇杆DOWN键 : PD3    (低电平表示按下)
-		摇杆LEFT键 : PG14   (低电平表示按下)
-		摇杆RIGHT键: PG13   (低电平表示按下)
-		摇杆OK键   : PG7    (低电平表示按下)
-*/
-
-/* 按键口对应的RCC时钟 */
-#define RCC_ALL_KEY 	(RCC_APB2Periph_GPIOA)
-
-#define GPIO_PORT_K1    GPIOA
-#define GPIO_PIN_K1	    GPIO_Pin_1
-
-#define GPIO_PORT_K2    GPIOA
-#define GPIO_PIN_K2	    GPIO_Pin_1
-
-#define GPIO_PORT_K3    GPIOA
-#define GPIO_PIN_K3	    GPIO_Pin_1
-
-#define GPIO_PORT_K4    GPIOA
-#define GPIO_PIN_K4	    GPIO_Pin_1
-
-#define GPIO_PORT_K5    GPIOA
-#define GPIO_PIN_K5	    GPIO_Pin_1
-
-#define GPIO_PORT_K6    GPIOA
-#define GPIO_PIN_K6	    GPIO_Pin_1
-
-#define GPIO_PORT_K7    GPIOA
-#define GPIO_PIN_K7	    GPIO_Pin_1
-
-#define GPIO_PORT_K8    GPIOA
-#define GPIO_PIN_K8	    GPIO_Pin_1
 
 static KEY_T s_tBtn[KEY_COUNT];
 static KEY_FIFO_T s_tKey;		/* 按键FIFO变量,结构体 */

@@ -40,7 +40,7 @@ void cb_timer1(void *arg)
 
 void cb_timer2(void *arg)
 {
-
+  printf("touch:%d\r\n",GET_TOUCH_STATE());
 
 }
 
