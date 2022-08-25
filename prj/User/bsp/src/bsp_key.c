@@ -46,31 +46,31 @@
 */
 
 /* 按键口对应的RCC时钟 */
-#define RCC_ALL_KEY 	(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOC | RCC_APB2Periph_GPIOD | RCC_APB2Periph_GPIOG)
+#define RCC_ALL_KEY 	(RCC_APB2Periph_GPIOA)
 
-#define GPIO_PORT_K1    GPIOC
-#define GPIO_PIN_K1	    GPIO_Pin_13
+#define GPIO_PORT_K1    GPIOA
+#define GPIO_PIN_K1	    GPIO_Pin_1
 
 #define GPIO_PORT_K2    GPIOA
-#define GPIO_PIN_K2	    GPIO_Pin_0
+#define GPIO_PIN_K2	    GPIO_Pin_1
 
-#define GPIO_PORT_K3    GPIOG
-#define GPIO_PIN_K3	    GPIO_Pin_8
+#define GPIO_PORT_K3    GPIOA
+#define GPIO_PIN_K3	    GPIO_Pin_1
 
-#define GPIO_PORT_K4    GPIOG
-#define GPIO_PIN_K4	    GPIO_Pin_15
+#define GPIO_PORT_K4    GPIOA
+#define GPIO_PIN_K4	    GPIO_Pin_1
 
-#define GPIO_PORT_K5    GPIOD
-#define GPIO_PIN_K5	    GPIO_Pin_3
+#define GPIO_PORT_K5    GPIOA
+#define GPIO_PIN_K5	    GPIO_Pin_1
 
-#define GPIO_PORT_K6    GPIOG
-#define GPIO_PIN_K6	    GPIO_Pin_14
+#define GPIO_PORT_K6    GPIOA
+#define GPIO_PIN_K6	    GPIO_Pin_1
 
-#define GPIO_PORT_K7    GPIOG
-#define GPIO_PIN_K7	    GPIO_Pin_13
+#define GPIO_PORT_K7    GPIOA
+#define GPIO_PIN_K7	    GPIO_Pin_1
 
-#define GPIO_PORT_K8    GPIOG
-#define GPIO_PIN_K8	    GPIO_Pin_7
+#define GPIO_PORT_K8    GPIOA
+#define GPIO_PIN_K8	    GPIO_Pin_1
 
 static KEY_T s_tBtn[KEY_COUNT];
 static KEY_FIFO_T s_tKey;		/* 按键FIFO变量,结构体 */
@@ -91,42 +91,47 @@ static void bsp_DetectKey(uint8_t i);
 #if 1	/* 为了区分3个事件:　K1单独按下, K2单独按下， K1和K2同时按下 */
 static uint8_t IsKeyDown1(void)
 {
-	if ((GPIO_PORT_K1->IDR & GPIO_PIN_K1) == 0 && (GPIO_PORT_K2->IDR & GPIO_PIN_K2) == 0
-		&& (GPIO_PORT_K3->IDR & GPIO_PIN_K3) != 0)
+	// if ((GPIO_PORT_K1->IDR & GPIO_PIN_K1) == 0 && (GPIO_PORT_K2->IDR & GPIO_PIN_K2) == 0
+	// 	&& (GPIO_PORT_K3->IDR & GPIO_PIN_K3) != 0)
+	// 	return 1;
+	// else 
+	// 	return 0;
+
+	if ((GPIO_PORT_K1->IDR & GPIO_PIN_K1) == 0)
 		return 1;
 	else 
 		return 0;
 }
 static uint8_t IsKeyDown2(void)
 {
-	if ((GPIO_PORT_K1->IDR & GPIO_PIN_K1) != 0 && (GPIO_PORT_K2->IDR & GPIO_PIN_K2) != 0
-		&& (GPIO_PORT_K3->IDR & GPIO_PIN_K3) != 0)
-		return 1;
-	else 
+	// if ((GPIO_PORT_K1->IDR & GPIO_PIN_K1) != 0 && (GPIO_PORT_K2->IDR & GPIO_PIN_K2) != 0
+	// 	&& (GPIO_PORT_K3->IDR & GPIO_PIN_K3) != 0)
+	// 	return 1;
+	// else 
 		return 0;
 }
 static uint8_t IsKeyDown3(void)
 {
-	if ((GPIO_PORT_K1->IDR & GPIO_PIN_K1) != 0 && (GPIO_PORT_K2->IDR & GPIO_PIN_K2) == 0
-		&& (GPIO_PORT_K3->IDR & GPIO_PIN_K3) == 0)
-		return 1;
-	else 
+	// if ((GPIO_PORT_K1->IDR & GPIO_PIN_K1) != 0 && (GPIO_PORT_K2->IDR & GPIO_PIN_K2) == 0
+	// 	&& (GPIO_PORT_K3->IDR & GPIO_PIN_K3) == 0)
+	// 	return 1;
+	// else 
 		return 0;
 }
 static uint8_t IsKeyDown9(void)	/* K1 K2组合键 */
 {
-	if ((GPIO_PORT_K1->IDR & GPIO_PIN_K1) == 0 && (GPIO_PORT_K2->IDR & GPIO_PIN_K2) != 0
-		&& (GPIO_PORT_K3->IDR & GPIO_PIN_K3) != 0)
-		return 1;
-	else 
+	// if ((GPIO_PORT_K1->IDR & GPIO_PIN_K1) == 0 && (GPIO_PORT_K2->IDR & GPIO_PIN_K2) != 0
+	// 	&& (GPIO_PORT_K3->IDR & GPIO_PIN_K3) != 0)
+	// 	return 1;
+	// else 
 		return 0;
 }
 static uint8_t IsKeyDown10(void)	/* K2 K3组合键 */
 {
-	if ((GPIO_PORT_K1->IDR & GPIO_PIN_K1) != 0 && (GPIO_PORT_K2->IDR & GPIO_PIN_K2) != 0
-		&& (GPIO_PORT_K3->IDR & GPIO_PIN_K3) == 0)
-		return 1;
-	else 
+	// if ((GPIO_PORT_K1->IDR & GPIO_PIN_K1) != 0 && (GPIO_PORT_K2->IDR & GPIO_PIN_K2) != 0
+	// 	&& (GPIO_PORT_K3->IDR & GPIO_PIN_K3) == 0)
+	// 	return 1;
+	// else 
 		return 0;
 }
 #else	

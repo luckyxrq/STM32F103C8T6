@@ -3,10 +3,9 @@
 #include "shell.h"
 #include "multi_timer.h"
 
-
 static struct pt pt1, pt2;
 static Timer timer1, timer2;
-static int time_cnt = 0 ;
+
 
 static int protothread1(struct pt *pt)
 {
@@ -14,13 +13,12 @@ static int protothread1(struct pt *pt)
 
   while (1)
   {
-    PT_WAIT_UNTIL(pt, time_cnt %5 == 0);
+
     PT_YIELD(pt);
   }
 
   PT_END(pt);
 }
-
 
 static int protothread2(struct pt *pt)
 {
@@ -28,26 +26,23 @@ static int protothread2(struct pt *pt)
 
   while (1)
   {
-    PT_WAIT_UNTIL(pt, time_cnt %2 == 0);
+
     PT_YIELD(pt);
   }
 
   PT_END(pt);
 }
 
-
 void cb_timer1(void *arg)
 {
-  log("----<<<<<<<<<<<<<<<<<<<<<<<---------------------------------\r\n");
-  
+  bsp_LedToggle(1);
 }
 
 void cb_timer2(void *arg)
 {
-  ++time_cnt;
-  log("------------------------------------>>>>>>>>>>>>>>>>>>>>----\r\n");
-}
 
+
+}
 
 int main(void)
 {
@@ -113,4 +108,4 @@ int timer_start_2(int argc, char *agrv[])
 }
 SHELL_EXPORT_CMD(SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_CMD_MAIN), timer_start_2, timer_start_2, timer_start_2);
 
-SHELL_EXPORT_VAR(SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_VAR_INT), time_cnt, &time_cnt, time_cnt);
+// SHELL_EXPORT_VAR(SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_VAR_INT), time_cnt, &time_cnt, time_cnt);
