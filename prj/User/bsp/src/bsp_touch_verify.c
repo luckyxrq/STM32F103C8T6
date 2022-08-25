@@ -76,7 +76,7 @@ void tv_Analysis(void)
 	static uint32_t addr = 0 ; /* 地址 */
 	static uint8_t identification = 0 ; /* 标识符 */
 	static uint16_t len = 0 ; /* 帧长度 */
-
+	static uint8_t ensure_code = 0 ; /* 确认码 */
 
     /* 字段 */
     uint8_t data = 0 ;
@@ -109,7 +109,7 @@ void tv_Analysis(void)
         }
         else if(index == 7)  /* 标识符 */
         {
-            
+            identification = analysis_buf[6];
         }
         else if(index == 9)  /* 长度 */
         {
@@ -127,7 +127,16 @@ void tv_Analysis(void)
 
 			if(((uint8_t)((chk_sum>>8 )&0xFF)==analysis_buf[index-2]) && ((uint8_t)((chk_sum )&0xFF)==analysis_buf[index-1]))
 			{
-				printf("校验通过\r\n");
+				
+				if(identification == 0x07)
+				{
+					ensure_code = analysis_buf[9];
+					printf("ensure_code:%02X \r\n", ensure_code);
+				}
+				else
+				{
+					printf("校验通过\r\n");
+				}
 			}
 			else
 			{
@@ -138,6 +147,7 @@ void tv_Analysis(void)
 			addr = 0 ; 
 			identification = 0 ; 
 			len = 0 ; 
+			ensure_code = 0 ; /* 确认码 */
         }
        
     }
