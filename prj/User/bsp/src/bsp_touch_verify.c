@@ -1,5 +1,151 @@
 #include "bsp.h"
 
+#define TOUCH_VERIFY_ADDR      0xFFFFFFFF /* 指纹模块的默认地址 */
+
+#define FRAME_HRADER_H         0xEF /* 包头 */
+#define FRAME_HRADER_L         0x01
+
+#define ANALYSIS_BUF_SIZE      256
+static uint8_t analysis_buf[ANALYSIS_BUF_SIZE] = {0};
+
+#define TV_RX_FRAME_SIZE_MIN   (9+2)
+
+/*
+	addr      地址默认0xFFFFFFFF
+	包标识     01：命令包  02：数据包，且有后续包  08：最后一个数据包，即结束包
+	所有的数据包都要加包头：0xEF01
+*/
+void tv_Send(uint32_t addr, uint8_t identification, uint16_t len, uint8_t data[])
+{
+	uint8_t i = 0 ;
+	uint32_t chk_sum = 0 ;
+	uint8_t buf[128];
+	memset(buf, 0, sizeof(buf));
+
+
+	/* 发送包头 */
+	buf[0] = FRAME_HRADER_H;
+	buf[1] = FRAME_HRADER_L;
+
+	/* 发送地址 */
+	buf[2] = (uint8_t)((addr>>24)&0xFF);
+	buf[3] = (uint8_t)((addr>>16)&0xFF);
+	buf[4] = (uint8_t)((addr>>8 )&0xFF);
+	buf[5] = (uint8_t)((addr    )&0xFF);
+
+	/* 发送包标识 */
+	buf[6] = identification;
+	chk_sum += buf[6];
+
+	/* 发送长度 */
+	buf[7] = (uint8_t)((len>>8 )&0xFF);
+	buf[8] = (uint8_t)((len    )&0xFF);
+
+	chk_sum += buf[7];
+	chk_sum += buf[8];
+
+	/* 数据部分，长度时数据部分的长度和校验和的长度全部 */
+	for(i=0;i<len - 2;i++)
+	{
+		buf[9+i] = data[i];
+		chk_sum += data[i];
+	}
+
+	/* 校验和 */
+	buf[9+i] = (uint8_t)((chk_sum>>8 )&0xFF);
+	buf[9+i+1] = (uint8_t)((chk_sum  )&0xFF);
+	
+	/* 调用硬件发送 */
+	comSendBuf(COM2, buf, 9+len);
+}
+
+
+
+
+void tv_GetEcho(void)
+{
+	uint8_t buf[] = {0x53};
+	tv_Send(TOUCH_VERIFY_ADDR, 0x01, 0x03, buf);
+}
+
+/* 解析模块上传的数据 */
+void tv_Analysis(void)
+{
+	/* 字节索引 */
+    static uint16_t index = 0 ;
+	static uint32_t addr = 0 ; /* 地址 */
+	static uint8_t identification = 0 ; /* 标识符 */
+	static uint16_t len = 0 ; /* 帧长度 */
+
+
+    /* 字段 */
+    uint8_t data = 0 ;
+
+    /* 解析数据 */
+    while(comGetChar(COM2,&data))
+    {
+		printf("%02x ", data);
+        analysis_buf[index % ANALYSIS_BUF_SIZE] = data ;
+        index++;
+
+        if(index == 1)       /* 帧头 第1个  */
+        {
+            if(data != FRAME_HRADER_H)
+            {
+                index = 0 ;
+            }
+        }
+        else if(index == 2)  /* 帧头 第2个  */
+        {
+            if(data != FRAME_HRADER_L)
+            {
+                index = 0 ;
+            }
+        }
+        else if(index == 6)  /* 地址 */
+        {
+            
+            
+        }
+        else if(index == 7)  /* 标识符 */
+        {
+            
+        }
+        else if(index == 9)  /* 长度 */
+        {
+            len = ((uint16_t)analysis_buf[7] << 8) | ((uint16_t)analysis_buf[8]);
+        }
+        else if(index >= TV_RX_FRAME_SIZE_MIN && index >= 9 + len)  /* 接收完毕 */
+        {
+            uint8_t i = 0 ;
+			uint32_t chk_sum = 0 ;
+
+			for(i=0;i<index-6-2;i++)
+			{
+				chk_sum += analysis_buf[6+i];
+			}
+
+			if(((uint8_t)((chk_sum>>8 )&0xFF)==analysis_buf[index-2]) && ((uint8_t)((chk_sum )&0xFF)==analysis_buf[index-1]))
+			{
+				printf("校验通过\r\n");
+			}
+			else
+			{
+				printf("校验失败\r\n");
+			}
+
+			index = 0 ;
+			addr = 0 ; 
+			identification = 0 ; 
+			len = 0 ; 
+        }
+       
+    }
+}
+
+
+
+
 /*
 	应答是将有关命令执行情况与结果上报给主控，应答包含有参数，并可跟后续数据包。
 	主控只有在 收到应答包后才能确认收包情况与指令执行情况
@@ -60,3 +206,4 @@ const char *EnsureMessage(uint8_t ensure)
 	}
 	return p;	
 }
+

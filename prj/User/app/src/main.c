@@ -13,11 +13,9 @@ static int protothread1(struct pt *pt)
 
   while (1)
   { 
-    uint8_t byte = 0 ;
-    if(comGetChar(COM2,&byte))
-    {
-      printf("%02X ", byte);
-    }
+    
+    tv_Analysis();
+
     PT_YIELD(pt);
   }
 
@@ -44,9 +42,11 @@ void cb_timer1(void *arg)
 
 void cb_timer2(void *arg)
 {
-  // printf("touch:%d\r\n",GET_TOUCH_STATE());
-  uint8_t cmd[] = {0xEF, 0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x01, 0x00, 0x03, 0x53, 0x00, 0x57};
-  comSendBuf(COM2,cmd,sizeof(cmd));
+  // // printf("touch:%d\r\n",GET_TOUCH_STATE());
+  // uint8_t cmd[] = {0xEF, 0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x01, 0x00, 0x03, 0x53, 0x00, 0x57};
+  // comSendBuf(COM2,cmd,sizeof(cmd));
+
+  tv_GetEcho();
 }
 
 int main(void)
@@ -60,7 +60,7 @@ int main(void)
 
   /* timer */
   timer_init(&timer1, cb_timer1, 500, 500, 0);
-  timer_init(&timer2, cb_timer2, 500, 1000, 0);
+  timer_init(&timer2, cb_timer2, 500, 100, 0);
   timer_start(&timer1);
   timer_start(&timer2);
 
