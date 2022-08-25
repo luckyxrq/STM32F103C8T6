@@ -404,16 +404,6 @@
               <FilePath>..\..\User\bsp\src\bsp_led.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_spi_bus.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\bsp\src\bsp_spi_bus.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_spi_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\bsp\src\bsp_spi_flash.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_timer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\src\bsp_timer.c</FilePath>
@@ -442,6 +432,11 @@
               <FileName>stm32f10x_assert.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\stm32f10x_assert.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_touch_verify.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\src\bsp_touch_verify.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1007,16 +1002,6 @@
               <FilePath>..\..\User\bsp\src\bsp_led.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_spi_bus.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\bsp\src\bsp_spi_bus.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_spi_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\bsp\src\bsp_spi_flash.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_timer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\src\bsp_timer.c</FilePath>
@@ -1045,6 +1030,11 @@
               <FileName>stm32f10x_assert.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\stm32f10x_assert.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_touch_verify.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\src\bsp_touch_verify.c</FilePath>
             </File>
           </Files>
         </Group>

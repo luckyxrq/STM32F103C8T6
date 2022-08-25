@@ -12,8 +12,12 @@ static int protothread1(struct pt *pt)
   PT_BEGIN(pt);
 
   while (1)
-  {
-
+  { 
+    uint8_t byte = 0 ;
+    if(comGetChar(COM2,&byte))
+    {
+      printf("%02X ", byte);
+    }
     PT_YIELD(pt);
   }
 
@@ -32,7 +36,7 @@ static int protothread2(struct pt *pt)
 
   PT_END(pt);
 }
-
+ 
 void cb_timer1(void *arg)
 {
   bsp_LedToggle(1);
@@ -40,8 +44,9 @@ void cb_timer1(void *arg)
 
 void cb_timer2(void *arg)
 {
-  printf("touch:%d\r\n",GET_TOUCH_STATE());
-
+  // printf("touch:%d\r\n",GET_TOUCH_STATE());
+  uint8_t cmd[] = {0xEF, 0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x01, 0x00, 0x03, 0x53, 0x00, 0x57};
+  comSendBuf(COM2,cmd,sizeof(cmd));
 }
 
 int main(void)

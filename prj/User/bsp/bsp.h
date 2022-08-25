@@ -64,8 +64,7 @@
 #include "bsp_led.h"
 #include "bsp_timer.h"
 #include "bsp_key.h"
-#include "bsp_spi_bus.h"
-#include "bsp_spi_flash.h"
+#include "bsp_touch_verify.h"
 
 
 extern uint8_t log_level;
